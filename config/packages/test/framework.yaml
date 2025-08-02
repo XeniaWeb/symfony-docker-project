@@ -1,0 +1,9 @@
+framework:
+    test: true
+    session:
+        storage_factory_id: session.storage.factory.mock_file
+    cache:
+        app: cache.adapter.array
+        system: cache.adapter.system
+        directory: '%kernel.cache_dir%/pools'
+        default_doctrine_provider: 'doctrine.system_cache_pool' 

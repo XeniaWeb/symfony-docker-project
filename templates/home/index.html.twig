@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block body %}
+<!-- Контейнер для Vue приложения -->
+<div id="app">
+    <!-- Vue приложение будет загружено здесь -->
+    <div class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Загрузка...</span>
+        </div>
+        <p class="mt-2">Загрузка Vue приложения...</p>
+    </div>
+</div>
+{% endblock %} 

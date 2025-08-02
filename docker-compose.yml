@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # PHP-FPM Service
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    container_name: symfony_php
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www/
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - symfony_network
+
+  # Nginx Service
+  nginx:
+    image: nginx:alpine
+    container_name: symfony_nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - symfony_network
+    depends_on:
+      - php
+
+  # PostgreSQL Service
+  postgres:
+    image: postgres:16-alpine
+    container_name: symfony_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: symfony_db
+      POSTGRES_USER: symfony_user
+      POSTGRES_PASSWORD: symfony_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - symfony_network
+
+  # Redis Service (optional, for caching)
+  redis:
+    image: redis:alpine
+    container_name: symfony_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - symfony_network
+
+  # MailHog Service (for email testing)
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: symfony_mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - symfony_network
+
+volumes:
+  postgres_data:
+
+networks:
+  symfony_network:
+    driver: bridge 

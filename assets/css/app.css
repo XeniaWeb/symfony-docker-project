@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Кастомные стили, которые дополняют Vuetify */
+@layer components {
+  /* Кастомные компоненты */
+  .custom-card {
+    @apply bg-white rounded-lg shadow-lg p-6;
+  }
+  
+  .custom-button {
+    @apply px-4 py-2 rounded-lg font-semibold transition-all duration-200;
+  }
+  
+  .custom-button-primary {
+    @apply bg-custom-blue text-white hover:bg-blue-700;
+  }
+}
+
+@layer utilities {
+  /* Кастомные утилиты */
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+} 

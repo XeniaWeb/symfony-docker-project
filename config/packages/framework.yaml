@@ -1,0 +1,38 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+
+    handle_all_throwables: true
+    session:
+        handler_id: null
+        cookie_secure: auto
+        cookie_samesite: lax
+        storage_factory_id: session.storage.factory.native
+    php_errors:
+        log: true
+    mailer:
+        dsn: '%env(MAILER_DSN)%'
+    cache:
+        app: cache.adapter.filesystem
+        system: cache.adapter.system
+        directory: '%kernel.cache_dir%/pools'
+        default_doctrine_provider: 'doctrine.system_cache_pool'
+    assets:
+        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
+    http_client:
+        scoped_clients:
+            # Configure a scoped HTTP client for the API
+            api_client:
+                base_uri: 'https://api.github.com/'
+                headers:
+                    Accept: 'application/vnd.github.v3+json'
+                    'User-Agent': 'My Symfony App'
+            # Configure another scoped HTTP client for another API
+            # another_api:
+            #     base_uri: 'https://api.another-api.com/'
+    messenger:
+        transports:
+            async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            failed: 'doctrine://default?queue_name=failed'
+            sync: 'sync://'
+        routing:
+            'App\Message\AsyncMessage': async 
