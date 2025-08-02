@@ -15,7 +15,7 @@ framework:
         app: cache.adapter.filesystem
         system: cache.adapter.system
         directory: '%kernel.cache_dir%/pools'
-        default_doctrine_provider: 'doctrine.system_cache_pool'
+        default_doctrine_dbal_provider: 'doctrine.system_cache_pool'
     assets:
         json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
     http_client:
@@ -29,10 +29,4 @@ framework:
             # Configure another scoped HTTP client for another API
             # another_api:
             #     base_uri: 'https://api.another-api.com/'
-    messenger:
-        transports:
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            failed: 'doctrine://default?queue_name=failed'
-            sync: 'sync://'
-        routing:
-            'App\Message\AsyncMessage': async 
+ 

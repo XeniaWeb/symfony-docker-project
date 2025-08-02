@@ -22,11 +22,15 @@ WORKDIR /var/www
 # Copy existing application directory contents
 COPY . /var/www
 
-# Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www
+# Set proper permissions for development
+RUN chown -R www-data:www-data /var/www
+RUN chmod -R 777 /var/www
 
-# Change current user to www
-USER www-data
+# Create composer cache directory with proper permissions
+RUN mkdir -p /var/www/.composer/cache && chown -R www-data:www-data /var/www/.composer
+
+# Keep root user for development (will be changed to www-data in production)
+# USER www-data
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
