@@ -1,6 +1,6 @@
 # Symfony + Docker + PostgreSQL Project
 
-Полноценный проект Symfony 7.4 с Docker, PostgreSQL и Vue3 для быстрого старта разработки.
+Полноценный проект Symfony 7.3 с Docker, PostgreSQL и Vue3 для быстрого старта разработки.
 
 ## 🚀 Быстрый старт
 
@@ -72,6 +72,7 @@ symfony-docker-project/
 - **PostgreSQL 16** - база данных
 - **Redis** - кэширование и очереди
 - **MailHog** - тестирование email
+- **Symfony 7.3** - PHP фреймворк
 - **Vue3 Composition API** - современный фронтенд
 - **Vuetify** - Material Design компоненты
 - **Tailwind CSS** - utility-first CSS фреймворк
@@ -187,12 +188,71 @@ npm run watch
 
 ## 🔐 Переменные окружения
 
-Основные переменные окружения (в файле `.env.local`):
+### **Файл `.env`**
 
+Основной файл с переменными окружения, который используется как Symfony, так и Docker Compose:
+
+```bash
+###> symfony/framework-bundle ###
+APP_ENV=dev
+APP_SECRET=your-secret-key-here-change-it-in-production
+###< symfony/framework-bundle ###
+
+###> doctrine/doctrine-bundle ###
+DATABASE_URL="postgresql://symfony_user:symfony_password@postgres:5432/symfony_db?serverVersion=16&charset=utf8"
+###< doctrine/doctrine-bundle ###
+
+###> symfony/mailer ###
+MAILER_DSN=smtp://mailhog:1025
+###< symfony/mailer ###
+
+###> docker-compose variables ###
+# Docker Compose Configuration
+NGINX_PORT=8080
+DB_NAME=symfony_db
+DB_USER=symfony_user
+DB_PASSWORD=symfony_password
+DB_PORT=5432
+###< docker-compose variables ###
+```
+
+### **Описание переменных:**
+
+#### **Symfony переменные:**
+- `APP_ENV` - окружение приложения (dev, test, prod)
+- `APP_SECRET` - секретный ключ для безопасности
 - `DATABASE_URL` - строка подключения к PostgreSQL
-- `APP_SECRET` - секретный ключ приложения
-- `MAILER_DSN` - конфигурация почты
-- `MESSENGER_TRANSPORT_DSN` - конфигурация очередей
+- `MAILER_DSN` - конфигурация почты (MailHog для разработки)
+
+#### **Docker Compose переменные:**
+- `NGINX_PORT` - порт для Nginx (по умолчанию 8080)
+- `DB_NAME` - имя базы данных PostgreSQL
+- `DB_USER` - пользователь базы данных
+- `DB_PASSWORD` - пароль базы данных
+- `DB_PORT` - порт PostgreSQL (по умолчанию 5432)
+
+### **Использование в docker-compose.yml:**
+
+```yaml
+# PHP сервис использует переменные Symfony
+environment:
+  - APP_ENV=${APP_ENV}
+  - APP_SECRET=${APP_SECRET}
+  - DATABASE_URL=${DATABASE_URL}
+  - MAILER_DSN=${MAILER_DSN}
+
+# Nginx использует переменную порта
+ports:
+  - "${NGINX_PORT:-8080}:80"
+
+# PostgreSQL использует переменные БД
+environment:
+  POSTGRES_DB: ${DB_NAME:-symfony_db}
+  POSTGRES_USER: ${DB_USER:-symfony_user}
+  POSTGRES_PASSWORD: ${DB_PASSWORD:-symfony_password}
+ports:
+  - "${DB_PORT:-5432}:5432"
+```
 
 ## 📝 Разработка
 
