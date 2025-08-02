@@ -17,7 +17,7 @@ cd symfony-docker-project
 
 2. **Скопируйте файл переменных окружения:**
 ```bash
-cp env.example .env.local
+cp env.example .env
 ```
 
 3. **Запустите Docker контейнеры:**
@@ -277,7 +277,7 @@ docker-compose exec php php bin/phpunit
 
 Для продакшн развертывания:
 
-1. Измените `APP_ENV=prod` в `.env.local`
+1. Измените `APP_ENV=prod` в `.env`
 2. Настройте реальные переменные окружения
 3. Выполните `docker-compose exec php php bin/console cache:clear --env=prod`
 4. Настройте SSL сертификаты для Nginx
