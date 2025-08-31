@@ -149,7 +149,7 @@ const features = ref([
   'Vue3 Composition API',
   'Vuetify Material Design',
   'Tailwind CSS',
-  'Webpack Encore',
+  'Vite',
 ]);
 
 const commands = ref([
