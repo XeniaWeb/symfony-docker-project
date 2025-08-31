@@ -36,10 +36,21 @@ docker-compose exec php php bin/console doctrine:database:create
 docker-compose exec php php bin/console doctrine:migrations:migrate
 ```
 
-6. **Откройте браузер и перейдите по адресу:**
+6. **Соберите frontend assets (опционально):**
+```bash
+# Локально
+npm install && npm run build
+
+# Или в Docker контейнере
+docker-compose exec node npm run build
+```
+
+7. **Откройте браузер и перейдите по адресу:**
 ```
 http://localhost:8080
 ```
+
+**Примечание:** Node.js контейнер автоматически запускает Vite dev-сервер при старте проекта.
 
 ## 📁 Структура проекта
 
@@ -72,12 +83,13 @@ symfony-docker-project/
 - **PostgreSQL 16** - база данных
 - **Redis** - кэширование и очереди
 - **MailHog** - тестирование email
+- **Node.js 18** - сборка frontend assets
 - **Symfony 7.3** - PHP фреймворк
 - **Vue3 Composition API** - современный фронтенд
 - **Vuetify** - Material Design компоненты
 - **Tailwind CSS** - utility-first CSS фреймворк
+- **Vite** - быстрый сборщик модулей
 - **Гибридный подход** - Vuetify + Tailwind CSS
-- **Webpack Encore** - сборка assets
 - **Composables** - переиспользуемая логика
 
 ## 🔧 Полезные команды
@@ -130,7 +142,7 @@ docker-compose exec php composer require package-name
 docker-compose exec php composer update
 ```
 
-### NPM команды
+### NPM команды (локально)
 ```bash
 # Установка зависимостей
 npm install
@@ -143,6 +155,24 @@ npm run build
 
 # Отслеживание изменений
 npm run watch
+```
+
+### NPM команды (в Docker контейнере)
+```bash
+# Запустить dev-сервер в контейнере
+docker-compose exec node npm run dev
+
+# Собрать для продакшна в контейнере
+docker-compose exec node npm run build
+
+# Запустить watch режим в контейнере
+docker-compose exec node npm run watch
+
+# Проверить статус Node.js контейнера
+docker-compose logs node
+
+# Перезапустить Node.js контейнер
+docker-compose restart node
 ```
 
 ## 🎨 Гибридный подход: Vuetify + Tailwind CSS

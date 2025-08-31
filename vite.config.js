@@ -13,7 +13,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         app: resolve(__dirname, 'assets/app.js'),
-        styles: resolve(__dirname, 'assets/css/app.css'),
       },
       output: {
         entryFileNames: '[name].js',
@@ -28,6 +27,10 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5173,
     strictPort: true,
+    hmr: {
+      host: 'localhost',
+      port: 5173,
+    },
   },
   css: {
     postcss: {
