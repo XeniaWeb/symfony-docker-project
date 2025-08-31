@@ -25,10 +25,10 @@
         <v-row>
           <v-col cols="12">
             <v-card>
-                             <v-card-title class="text-h4">
-                 <v-icon start color="primary">mdi-rocket-launch</v-icon>
-                 Symfony + Docker + PostgreSQL + Vue3 + Vuetify + Tailwind
-               </v-card-title>
+              <v-card-title class="text-h4">
+                <v-icon start color="primary">mdi-rocket-launch</v-icon>
+                Symfony + Docker + PostgreSQL + Vue3 + Vuetify + Tailwind
+              </v-card-title>
               
               <v-card-text>
                 <v-alert type="success" variant="tonal" class="mb-4">
@@ -74,7 +74,8 @@
                             </template>
                             <v-list-item-title>{{ command.title }}</v-list-item-title>
                             <v-list-item-subtitle>
-                              <v-chip size="small" variant="outlined" class="font-family-monospace">
+                              <v-chip size="small" variant="outlined"
+                                      class="font-family-monospace">
                                 {{ command.code }}
                               </v-chip>
                             </v-list-item-subtitle>
@@ -148,26 +149,26 @@ const features = ref([
   'Vue3 Composition API',
   'Vuetify Material Design',
   'Tailwind CSS',
-  'Webpack Encore'
+  'Webpack Encore',
 ]);
 
 const commands = ref([
   {
     title: 'Запуск контейнеров',
-    code: 'docker-compose up -d'
+    code: 'docker-compose up -d',
   },
   {
     title: 'Установка PHP зависимостей',
-    code: 'docker-compose exec php composer install'
+    code: 'docker-compose exec php composer install',
   },
   {
     title: 'Установка Node.js зависимостей',
-    code: 'npm install'
+    code: 'npm install',
   },
   {
     title: 'Сборка Vue компонентов',
-    code: 'npm run dev'
-  }
+    code: 'npm run dev',
+  },
 ]);
 
 // Таймер для обновления времени
@@ -190,7 +191,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  if (timer) {
+  if(timer) {
     clearInterval(timer);
   }
 });
