@@ -10,7 +10,7 @@
         "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/doctrine-bundle": "^2.10",
+        "doctrine/doctrine-bundle": "^2.18",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^3.4",
         "phpdocumentor/reflection-docblock": "^5.3",
