@@ -77,7 +77,7 @@
 
 **a) Проверка на устаревшие функции:**
 ```bash
-docker-compose exec php php bin/console debug:container --show-deprecations
+docker-compose exec php php bin/console debug:container --deprecations
 docker-compose exec php php bin/console lint:yaml config/
 ```
 
@@ -155,7 +155,7 @@ docker-compose exec php composer update "symfony/*" --with-all-dependencies
 ```
 
 ```shellscript
-docker-compose exec php php bin/console debug:container --show-deprecations
+docker-compose exec php php bin/console debug:container --deprecations
 docker-compose exec php php bin/console lint:yaml config/
 ```
 
