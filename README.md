@@ -1,6 +1,6 @@
 # Symfony + Docker + PostgreSQL Project
 
-Полноценный проект Symfony 7.3 с Docker, PostgreSQL и Vue3 для быстрого старта разработки.
+Полноценный проект Symfony 7.4 с Docker, PostgreSQL и Vue3 для быстрого старта разработки.
 
 ## 🚀 Быстрый старт
 
@@ -89,7 +89,7 @@ symfony-docker-project/
 - **Redis** - кэширование и очереди
 - **MailHog** - тестирование email
 - **Node.js 22** - сборка frontend assets
-- **Symfony 7.3** - PHP фреймворк
+- **Symfony 7.4** - PHP фреймворк
 - **Vue3 Composition API** - современный фронтенд
 - **Vuetify** - Material Design компоненты
 - **Tailwind CSS** - utility-first CSS фреймворк

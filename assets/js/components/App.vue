@@ -139,7 +139,7 @@ const currentTime = ref('');
 
 // Данные для списков
 const features = ref([
-  'Symfony 7.3',
+  'Symfony 7.4',
   'PHP 8.4 с FPM',
   'Nginx веб-сервер',
   'PostgreSQL 16',
