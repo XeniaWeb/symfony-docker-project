@@ -5,7 +5,12 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-// Импортируем CSS стили
+// Импортируем стили в правильном порядке:
+// 1. Сначала Vuetify стили
+import 'vuetify/styles';
+// 2. Material Design Icons
+import '@mdi/font/css/materialdesignicons.css';
+// 3. Tailwind CSS (последним, чтобы мог переопределять стили Vuetify)
 import './css/app.css';
 
 // Импортируем Vue приложение
